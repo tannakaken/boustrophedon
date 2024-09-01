@@ -3,7 +3,8 @@ import { Link, Outlet, ScrollRestoration } from "react-router-dom"
 export const ReverseTemplate = () => {
     return (<div className="reverse-background">
             <h1 style={{
-              textAlign: "center",
+                  textAlign: "center",
+                  fontSize: "xx-large",
               }}>
                 <Link to="/reverse">裏牛耕式小説の勧め</Link>
             </h1>

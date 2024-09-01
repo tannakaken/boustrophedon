@@ -4,6 +4,7 @@ export const MainTemplate = () => {
     return (<div className="background">
         <h1 style={{
               textAlign: "center",
+            fontSize: "xx-large",
               }}>
             <Link to="/">牛耕式小説の勧め</Link>
         </h1>
