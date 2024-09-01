@@ -1,17 +1,30 @@
 #root {
-  display: flex;
-  place-items: center;
-  width: 100vw;
+  width: 100%;
+  height: 100vh;
 }
 
-.container {
-  font-size: x-large;
+.root {
+  width: 100%;
+  height: 100vh;
+}
+
+.background {
+  height: 100vh;
   background-color: white;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reverse-background {
+  min-height: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .wrapper {
-
   max-width: 720px;
   margin: 1rem;
   padding: 2rem;
@@ -19,26 +32,78 @@
   background-color: bisque;
 }
 
+
+.container {
+  font-size: x-large;
+  background-color: white;
+  color: black;
+  margin: 0 auto;
+}
+
+.reverse-container {
+  font-size: x-large;
+  background-color: black;
+  color: rgba(255, 255, 255, 0.87);;
+  margin: 0 auto;
+}
+
 .title {
   text-align: center;
   background-color: white;
+  color: #213547;
+}
+
+.reverse-title {
+  text-align: center;
+  background-color: black;
+  color: rgba(255, 255, 255, 0.87);;
 }
 
 .afterword {
   background-color: white;
+  color: #213547;
   padding: 1rem;
 }
 
+.reverse-afterword {
+  background-color: black;
+  color: rgba(255, 255, 255, 0.87);;
+  padding: 1rem;
+}
 
 @media (prefers-color-scheme: dark) {
+  .background {
+    background-color: #000;
+  }
+
   .container {
     background-color: #000;
+    color: rgba(255, 255, 255, 0.87);;
   }
   .title {
     background-color: #000;
+    color: rgba(255, 255, 255, 0.87);;
   }
   .afterword {
     background-color: #000;
+    color: rgba(255, 255, 255, 0.87);;
+  }
+
+  .reverse-background {
+    background-color: white;
+  }
+
+  .reverse-container {
+    background-color: white;
+    color: #213547;
+  }
+  .reverse-title {
+    background-color: white;
+    color: #213547;
+  }
+  .reverse-afterword {
+    background-color: white;
+    color: #213547;
   }
 }
 

@@ -1,8 +1,10 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider } from 'react-router-dom';
 import './App.css'
 import { Boustrophedon } from './Boustrophedon';
-import NovelViewer from './Novel';
+import NovelViewer from './NovelViewer';
 import { sample } from './assets/sample.novel';
+import { MainTemplate } from './MainTemplate';
+import { ReverseTemplate } from './ReverseTemplate';
 
 /* eslint-disable no-irregular-whitespace */
 const description = `牛耕式（ブストロフェドン）というものを知っているだろうか？　知らないのならば、今目の前にあるものがそれである。
@@ -41,57 +43,37 @@ const reverseDescription = `裏サイトへようこそ。
 ぜひロンゴロンゴ式牛耕式で表示する用の小説を送っていただきたい。`;
 /* eslint-enable no-irregular-whitespace */
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <div className="container">
-        <Routes>
-          <Route path="/reverse/*" element={
-            <h1 style={{
-              textAlign: "center",
-            }}><Link to="/reverse">裏牛耕式小説の勧め</Link></h1>
-          } />
-          <Route path="/*" element={
-            <h1 style={{
-              textAlign: "center",
-              }}><Link to="/">牛耕式小説の勧め</Link></h1>
-          } />
-        </Routes>
-
-        <Routes>
-            <Route path="/" element={
-              <div className="wrapper">
-                <Boustrophedon body={description} id="description" />
-              </div>} />
-            <Route path="/example" element={
-              <NovelViewer novel={sample} id="example" />}
-              />
-            <Route path="/post" element={<div className="wrapper"><p>投稿機能は現在準備中です。</p></div>} />
-            <Route path="/reverse" element={
-              <div className="wrapper">
-                <Boustrophedon body={reverseDescription} id="reverse" reverse />
-              </div>} />
-            <Route path="/reverse/example" element={<NovelViewer novel={sample} id="reverse-example" reverse />} />
-            <Route path="/reverse/post" element={<div className="wrapper"><p>投稿機能は現在準備中です。</p></div>} />
-        </Routes>
-        <Routes>
-          <Route path="/reverse/*" element={
-            <ul>
-              <li><Link to="/reverse/example">例</Link></li>
-              <li><Link to="/reverse/post">投稿</Link></li>
-              <li><Link to="/">表サイトへの出口。</Link></li>
-            </ul>} />
-          <Route path="/*" element={
-            <ul>
-              <li><Link to="/example">例</Link></li>
-              <li><Link to="/post">投稿</Link></li>
-              <li>裏サイトの入り口は秘密です<Link to="/reverse">。</Link></li>
-            </ul>} />
-        </Routes>
-
-      </div>
-    </BrowserRouter>
-  )
+const Root = () => {
+  return (<div className="root">
+    <Outlet />
+  </div>);
 }
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route path="reverse" element={<ReverseTemplate />}>
+        <Route path="" element={
+          <div className="wrapper">
+            <Boustrophedon body={reverseDescription} id="reverse" reverse />
+          </div>} />
+        <Route path="example" element={<NovelViewer novel={sample} id="reverse-example" reverse />} />
+        <Route path="post" element={<div className="wrapper"><p>投稿機能は現在準備中です。</p></div>} />
+      </Route>
+      <Route path="" element={<MainTemplate />}>
+        <Route path="" element={
+          <div className="wrapper">
+            <Boustrophedon body={description} id="description" />
+          </div>} />
+        <Route path="/example" element={
+          <NovelViewer novel={sample} id="example" />}
+          />
+        <Route path="/post" element={<div className="wrapper"><p>投稿機能は現在準備中です。</p></div>} />
+      </Route>
+    </Route>
+  )
+);
+
+const App = () => <RouterProvider router={router} />
 
 export default App

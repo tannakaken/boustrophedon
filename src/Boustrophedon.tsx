@@ -176,7 +176,7 @@ export const Boustrophedon = (props: Props) => {
       startLineIndex + splitedParagraph.length] // 次の段落の最初の行の全体の行数
     }, [lineLength, props.id, props.reverse]);
   return (
-    <div id={props.id} className='container'>
+    <div id={props.id} className={props.reverse ? 'reverse-container' : 'container'}>
       {props.body.split("\n")
         .reduce(paragraphReducer, [[], 0])[0] // 構築したUIだけ取り出す。
       }
